@@ -1,0 +1,28 @@
+{
+  "downloaded_at": "2026-10-23T23:04:23.139266+00:00",
+  "license": "Licence Ouverte / Open Licence 2.0 (Etalab)",
+  "files": [
+    {
+      "round": 1,
+      "status": "downloaded",
+      "dataset": "Elections municipales 2026 - Résultats du premier tour",
+      "dataset_page": "https://www.data.gouv.fr/datasets/elections-municipales-2026-resultats-du-premier-tour",
+      "resource": "Municipales 2026 - Résultats - Communes_2026-03-20.csv",
+      "url": "https://static.data.gouv.fr/resources/elections-municipales-2026-resultats-du-premier-tour/20260320-164339/municipales-2026-resultats-communes-2026-03-20.csv",
+      "path": "C:\\Users\\lelia\\OneDrive - Efrei\\School\\Sup\\ING2\\S7\\Data Visualization\\StApp26_20231141_GHEZALI_BIA\\data\\raw\\municipales2026_t1_communes.csv"
+    },
+    {
+      "round": 2,
+      "status": "downloaded",
+      "dataset": "Elections municipales 2026 - Résultats du second tour ",
+      "dataset_page": "https://www.data.gouv.fr/datasets/elections-municipales-2026-resultats-du-second-tour",
+      "resource": "Municipales 2026 - Résultats - Communes_2026-03-23_16h14.csv",
+      "url": "https://static.data.gouv.fr/resources/elections-municipales-2026-resultats-du-scond-tour/20260323-180124/municipales-2026-resultats-communes-2026-03-23-16h14.csv",
+      "path": "C:\\Users\\lelia\\OneDrive - Efrei\\School\\Sup\\ING2\\S7\\Data Visualization\\StApp26_20231141_GHEZALI_BIA\\data\\raw\\municipales2026_t2_communes.csv"
+    }
+  ],
+  "dataset_pages": {
+    "1": "https://www.data.gouv.fr/datasets/?q=Elections%20municipales%202026%20r%C3%A9sultats%20premier%20tour",
+    "2": "https://www.data.gouv.fr/datasets/elections-municipales-2026-resultats-du-second-tour"
+  }
+}

@@ -1,0 +1,184 @@
+[
+  {
+    "round": 1,
+    "rows_raw": 34836,
+    "columns_used": {
+      "dep_code": "Code département",
+      "dep_name": "Libellé département",
+      "com_code": "Code commune",
+      "com_name": "Libellé commune",
+      "inscrits": "Inscrits",
+      "abstentions": "Abstentions",
+      "votants": "Votants",
+      "blancs": "Blancs",
+      "nuls": "Nuls",
+      "exprimes": "Exprimés"
+    },
+    "excluded": [
+      {
+        "reason": "Voters missing or greater than registered voters",
+        "rows": 1
+      },
+      {
+        "reason": "Outside the 101 departments (e.g. other overseas collectivities)",
+        "rows": 35
+      }
+    ],
+    "missing": [
+      {
+        "column": "dep_code",
+        "source_column": "Code département",
+        "missing": 0
+      },
+      {
+        "column": "com_code",
+        "source_column": "Code commune",
+        "missing": 0
+      },
+      {
+        "column": "com_name",
+        "source_column": "Libellé commune",
+        "missing": 0
+      },
+      {
+        "column": "inscrits",
+        "source_column": "Inscrits",
+        "missing": 0
+      },
+      {
+        "column": "abstentions",
+        "source_column": "Abstentions",
+        "missing": 0
+      },
+      {
+        "column": "votants",
+        "source_column": "Votants",
+        "missing": 0
+      },
+      {
+        "column": "blancs",
+        "source_column": "Blancs",
+        "missing": 0
+      },
+      {
+        "column": "nuls",
+        "source_column": "Nuls",
+        "missing": 0
+      },
+      {
+        "column": "exprimes",
+        "source_column": "Exprimés",
+        "missing": 0
+      }
+    ],
+    "duplicates": 0,
+    "checks": [
+      {
+        "check": "Voters + abstentions = registered",
+        "tested": 34800,
+        "failed": 0
+      },
+      {
+        "check": "Blank + null + valid votes = voters",
+        "tested": 34800,
+        "failed": 0
+      },
+      {
+        "check": "Rates between 0 % and 100 %",
+        "tested": 34800,
+        "failed": 0
+      }
+    ],
+    "abstentions_derived": 0,
+    "rows_clean": 34800
+  },
+  {
+    "round": 2,
+    "rows_raw": 1526,
+    "columns_used": {
+      "dep_code": "Code département",
+      "dep_name": "Libellé département",
+      "com_code": "Code commune",
+      "com_name": "Libellé commune",
+      "inscrits": "Inscrits",
+      "abstentions": "Abstentions",
+      "votants": "Votants",
+      "blancs": "Blancs",
+      "nuls": "Nuls",
+      "exprimes": "Exprimés"
+    },
+    "excluded": [
+      {
+        "reason": "Outside the 101 departments (e.g. other overseas collectivities)",
+        "rows": 25
+      }
+    ],
+    "missing": [
+      {
+        "column": "dep_code",
+        "source_column": "Code département",
+        "missing": 0
+      },
+      {
+        "column": "com_code",
+        "source_column": "Code commune",
+        "missing": 0
+      },
+      {
+        "column": "com_name",
+        "source_column": "Libellé commune",
+        "missing": 0
+      },
+      {
+        "column": "inscrits",
+        "source_column": "Inscrits",
+        "missing": 0
+      },
+      {
+        "column": "abstentions",
+        "source_column": "Abstentions",
+        "missing": 0
+      },
+      {
+        "column": "votants",
+        "source_column": "Votants",
+        "missing": 0
+      },
+      {
+        "column": "blancs",
+        "source_column": "Blancs",
+        "missing": 0
+      },
+      {
+        "column": "nuls",
+        "source_column": "Nuls",
+        "missing": 0
+      },
+      {
+        "column": "exprimes",
+        "source_column": "Exprimés",
+        "missing": 0
+      }
+    ],
+    "duplicates": 0,
+    "checks": [
+      {
+        "check": "Voters + abstentions = registered",
+        "tested": 1501,
+        "failed": 0
+      },
+      {
+        "check": "Blank + null + valid votes = voters",
+        "tested": 1501,
+        "failed": 0
+      },
+      {
+        "check": "Rates between 0 % and 100 %",
+        "tested": 1501,
+        "failed": 0
+      }
+    ],
+    "abstentions_derived": 0,
+    "rows_clean": 1501
+  }
+]
