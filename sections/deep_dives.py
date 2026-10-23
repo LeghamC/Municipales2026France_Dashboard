@@ -24,10 +24,14 @@ def size_section(ctx: dict) -> None:
     st.header(f"{ctx['n']()} · Is it a big-city phenomenon?")
     if len(by_size) >= 2:
         first, last = by_size.iloc[0], by_size.iloc[-1]
-        st.markdown(
+        peak = by_size.loc[by_size[metric].idxmax()]
+        text = (
             f"**{label} goes from {first[metric]:.0%} in communes with {first['size_band']} registered voters "
-            f"to {last[metric]:.0%} in those with {last['size_band']}.**"
+            f"to {last[metric]:.0%} in those with {last['size_band']}"
         )
+        if peak["size_band"] not in (first["size_band"], last["size_band"]):
+            text += f", peaking at {peak[metric]:.0%} in communes with {peak['size_band']}"
+        st.markdown(text + ".**")
     st.plotly_chart(bar_by_size(by_size, metric, ctx["selection"][metric]), width="stretch")
     _alt(
         f"Bar chart of the {label.lower()} by commune size band, from the smallest communes on the left to the "

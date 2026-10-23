@@ -4,9 +4,9 @@ An interactive Streamlit data story about **who stayed home** at the municipal e
 15 and 22 March 2026: how large abstention was, whether it is a big-city phenomenon, where it is
 concentrated, and whether voters who turned up still rejected every option (blank and null ballots).
 
-- **Deployed app:** `<paste your Streamlit Community Cloud URL here>`
-- **Demo video:** `<paste your video link here>`
-- **Author:** `<First LAST>` — EFREI Paris, group BIA — student ID 20231141
+- **Deployed app:** https://silent-majority-2026.streamlit.app/
+- **Repository:** https://github.com/LeghamC/Municipales2026France_Dashboard.git
+- **Author:** Lélia GHEZALI - EFREI Paris, group BIA - student ID 20231141
 
 ---
 
@@ -14,23 +14,26 @@ concentrated, and whether voters who turned up still rejected every option (blan
 
 | | |
 |---|---|
-| **Hook** | Nearly half of registered voters may skip the most local of all elections — in a period of national political instability, a year before the 2027 presidential election. |
+| **Hook** | More than four in ten registered voters (42.9 %, i.e. 20.7 million people) skipped the most local of all elections, in a period of national political instability, a year before the 2027 presidential election. |
 | **Audience** | Citizens and journalists interested in civic participation; local officials and associations deciding where turnout efforts matter most. |
 | **Questions** | Q1 How big is abstention, and how many voters cast a blank/null ballot? · Q2 Does it grow with commune size? · Q3 Which departments are most affected? · Q4 Do single-list communes see more blank/null ballots? · Q5 Does a runoff mobilise or tire voters? |
 | **Narrative pattern** | Compare groups/regions (map + ranking) and rankings & distribution, closed by a before/after view of the two rounds. |
+| **Key takeaways** | Abstention peaks in medium-sized towns (48 %), not in the largest cities (44 %); 24 points separate the most and least abstentionist departments; where a single list ran, 14 % of voters cast a blank or null ballot vs 3 % elsewhere. |
 
-The narrative arc and the storyboard are detailed in [`REPORT.md`](REPORT.md).
+The narrative arc, storyboard and full findings are in [`REPORT.md`](REPORT.md).
 
 ## 2. Data
 
 | File | Source | License |
 |---|---|---|
-| Commune-level results, 1st round (15 March 2026) | Ministère de l'Intérieur, published on [data.gouv.fr](https://www.data.gouv.fr/) — dataset “Élections municipales 2026 – Résultats du premier tour” | Licence Ouverte / Open Licence 2.0 |
-| Commune-level results, 2nd round (22 March 2026) | [Élections municipales 2026 – Résultats du second tour](https://www.data.gouv.fr/datasets/elections-municipales-2026-resultats-du-second-tour) | Licence Ouverte / Open Licence 2.0 |
+| Commune-level results, 1st round (15 March 2026) | Ministère de l'Intérieur on data.gouv.fr — file “Municipales 2026 - Résultats - Communes_2026-03-20.csv” (exact dataset URL in `data/SOURCES.json`) | Licence Ouverte / Open Licence 2.0 |
+| Commune-level results, 2nd round (22 March 2026) | [Élections municipales 2026 – Résultats du second tour](https://www.data.gouv.fr/datasets/elections-municipales-2026-resultats-du-second-tour), file “Municipales 2026 - Résultats - Communes_2026-03-23_16h14.csv” | Licence Ouverte / Open Licence 2.0 |
 | Department boundaries (map only) | [france-geojson](https://github.com/gregoiredavid/france-geojson) (simplified departments) | See the repository for its license and original source |
 
 The exact files and URLs used are recorded automatically in `data/SOURCES.json` by the download script.
 Raw CSV files are **not** committed (see `.gitignore`); the script downloads them.
+
+**Size after cleaning:** 34,800 communes in round 1 (from 34,836 rows), 1,501 communes in round 2 (from 1,526 rows).
 
 ## 3. Run it locally (clean checkout)
 
@@ -38,7 +41,7 @@ Requires Python 3.12 or 3.13.
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
+# Windows: .venv\Scripts\activate      macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
 python scripts/download_data.py        # downloads, cleans, writes data/processed/
 streamlit run app.py
@@ -88,10 +91,12 @@ data/processed/         # cleaned parquet + quality_report.json
 4. Rows are excluded, and counted, when codes are missing, registered voters are zero, voters exceed
    registered voters, the department is outside the 101 departments, or the commune code is duplicated.
 5. Abstentions are recomputed as registered − voters when the column is absent.
-6. The number of lists per commune is counted from the `Voix N` columns when the file has them.
+6. The number of lists per commune is counted from the `Voix N` columns (lists with at least one vote).
 
-**Validation checks** shown in the app: voters + abstentions = registered; blank + null + valid = voters;
-rates within 0–100 %; missing values per field; duplicates.
+**Validation results on the real files:** all three checks (voters + abstentions = registered;
+blank + null + valid = voters; rates within 0–100 %) pass on 100 % of rows in both rounds; no duplicates and no
+missing values. 36 rows excluded in round 1 (35 outside the 101 departments, 1 with more voters than registered)
+and 25 in round 2 (all outside the 101 departments). All 1,501 runoff communes match a round-1 commune.
 
 **Indicators** are always computed as sums of counts divided by sums of counts (weighted by voters), never as
 averages of commune percentages: abstention rate = abstentions ÷ registered; participation = voters ÷ registered;
@@ -104,11 +109,14 @@ blank + null share = (blank + null) ÷ voters.
 - Abstention is measured among **registered** voters only; unregistered citizens are invisible.
 - Results are published subject to appeals and later corrections.
 - Paris, Lyon and Marseille vote by sector; their treatment depends on the commune-level file.
-- Small communes produce extreme percentages (hence weighting).
+- Small communes produce extreme percentages (hence weighting); a handful of communes show close to 100 %
+  abstention — they pass all checks, are kept, and weigh almost nothing in the weighted rates.
 - Overseas departments are in all totals but not drawn on the mainland map.
 - Associations only — no causal claim. Socio-economic factors are not in the data.
 
 ## 7. Deployment (Streamlit Community Cloud)
+
+**Live app:** https://silent-majority-2026.streamlit.app/
 
 1. Run `python scripts/download_data.py` locally, then commit `data/processed/` and `data/raw/departements.geojson`
    (small files) so the deployed app does not depend on data.gouv.fr being reachable.

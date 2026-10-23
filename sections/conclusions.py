@@ -12,11 +12,19 @@ def _insights(ctx: dict) -> list[str]:
     by_size = aggregate(sel, "size_band")
     if len(by_size) >= 2:
         small, big = by_size.iloc[0], by_size.iloc[-1]
-        gap = (big["abstention_rate"] - small["abstention_rate"]) * 100
-        out.append(
-            f"**Size matters:** abstention is {abs(gap):.0f} points {'higher' if gap > 0 else 'lower'} in the largest "
-            f"communes ({big['abstention_rate']:.0%}) than in the smallest ({small['abstention_rate']:.0%})."
-        )
+        peak = by_size.loc[by_size["abstention_rate"].idxmax()]
+        if peak["size_band"] not in (small["size_band"], big["size_band"]):
+            out.append(
+                f"**Size matters, but not linearly:** abstention rises from {small['abstention_rate']:.0%} in the smallest "
+                f"communes to {peak['abstention_rate']:.0%} in communes with {peak['size_band']} voters, then eases to "
+                f"{big['abstention_rate']:.0%} in the largest cities."
+            )
+        else:
+            gap = (big["abstention_rate"] - small["abstention_rate"]) * 100
+            out.append(
+                f"**Size matters:** abstention is {abs(gap):.0f} points {'higher' if gap > 0 else 'lower'} in the largest "
+                f"communes ({big['abstention_rate']:.0%}) than in the smallest ({small['abstention_rate']:.0%})."
+            )
     by_dep = aggregate(sel, ["dep_code", "dep_name"])
     if len(by_dep) >= 2:
         spread = (by_dep["abstention_rate"].max() - by_dep["abstention_rate"].min()) * 100
@@ -47,8 +55,8 @@ def render(ctx: dict) -> None:
         st.markdown(
             """
 #### What it implies
-- **Turnout efforts should start where the silence is loudest:** large communes and the departments at the
-  top of the ranking concentrate most of the people who did not vote.
+- **Turnout efforts should start where the silence is loudest:** medium-sized towns (20,000–99,999 voters)
+  have the highest abstention rate, and the departments at the top of the ranking come next.
 - **A blank ballot is a message, not apathy:** voters who turn up only to reject every option are not
   disengaged — they are dissatisfied with the choice offered. Where a single list runs, encouraging
   competing lists may matter as much as encouraging turnout.
