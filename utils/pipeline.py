@@ -15,7 +15,7 @@ def build(save: bool = True) -> tuple[pd.DataFrame, list[dict]]:
         raw = load_raw(round_no)
         if raw is None:
             if round_no == 1:
-                raise FileNotFoundError(f"Missing {RAW_FILES[1]} — run `python scripts/download_data.py` first.")
+                raise FileNotFoundError(f"Missing {RAW_FILES[1]} - run `python scripts/download_data.py` first.")
             continue
         clean, quality = clean_round(raw, round_no)
         frames.append(clean)

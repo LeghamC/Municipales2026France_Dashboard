@@ -32,7 +32,7 @@ GEOJSON_URL = (
     "departements-version-simplifiee.geojson"
 )
 
-SOURCE_LABEL = "Ministère de l'Intérieur — Élections municipales 2026 (15 & 22 March 2026) — data.gouv.fr"
+SOURCE_LABEL = "Ministère de l'Intérieur - Élections municipales 2026 (15 & 22 March 2026) - data.gouv.fr"
 LICENSE_LABEL = "Licence Ouverte / Open Licence 2.0 (Etalab)"
 ROUND_DATES = {1: "15 March 2026", 2: "22 March 2026"}
 

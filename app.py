@@ -7,7 +7,7 @@ from utils.io import load_geojson
 from utils.pipeline import build, load_processed
 from utils.prep import aggregate
 
-st.set_page_config(page_title="The Silent Majority — Municipales 2026", page_icon="🗳️", layout="wide")
+st.set_page_config(page_title="The Silent Majority - Municipales 2026", page_icon="🗳️", layout="wide")
 
 
 @st.cache_data(show_spinner="Loading and cleaning the election data…")
@@ -63,7 +63,7 @@ with st.sidebar:
     round_no = st.radio(
         "Election round",
         rounds,
-        format_func=lambda r: f"1st round — {ROUND_DATES[1]} (all communes)" if r == 1 else f"2nd round — {ROUND_DATES[2]} (runoff communes only)",
+        format_func=lambda r: f"1st round - {ROUND_DATES[1]} (all communes)" if r == 1 else f"2nd round - {ROUND_DATES[2]} (runoff communes only)",
         help="Most communes elect their council in the 1st round. Only communes where no list won outright held a 2nd round.",
     )
     metric = st.selectbox(
@@ -79,7 +79,7 @@ with st.sidebar:
     dept_pool = round_df[round_df["region"].isin(regions)] if regions else round_df
     dept_options = (
         dept_pool[["dep_code", "dep_name"]].drop_duplicates().sort_values("dep_code")
-        .assign(label=lambda d: d["dep_code"] + " — " + d["dep_name"].astype(str))
+        .assign(label=lambda d: d["dep_code"] + " - " + d["dep_name"].astype(str))
     )
     depts = st.multiselect("Department", dept_options["label"].tolist(), placeholder="All departments")
     sizes = st.multiselect(
@@ -100,7 +100,7 @@ sel = round_df
 if regions:
     sel = sel[sel["region"].isin(regions)]
 if depts:
-    codes = [d.split(" — ")[0] for d in depts]
+    codes = [d.split(" - ")[0] for d in depts]
     sel = sel[sel["dep_code"].isin(codes)]
 if sizes:
     sel = sel[sel["size_band"].isin(sizes)]

@@ -58,7 +58,7 @@ def render(ctx: dict) -> None:
 - **Turnout efforts should start where the silence is loudest:** medium-sized towns (20,000–99,999 voters)
   have the highest abstention rate, and the departments at the top of the ranking come next.
 - **A blank ballot is a message, not apathy:** voters who turn up only to reject every option are not
-  disengaged — they are dissatisfied with the choice offered. Where a single list runs, encouraging
+  disengaged: they are dissatisfied with the choice offered. Where a single list runs, encouraging
   competing lists may matter as much as encouraging turnout.
 - **Low turnout narrows the base of local mandates:** in communes where most registered voters stayed
   home, the elected council was chosen by a minority of the electorate.

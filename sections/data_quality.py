@@ -52,7 +52,7 @@ def render(ctx: dict) -> None:
         "Rates are recomputed from raw counts rather than taken from the file's percentage columns."
     )
     reports = ctx["reports"]
-    tabs = st.tabs([f"Round {q['round']} — {ROUND_DATES[q['round']]}" for q in reports])
+    tabs = st.tabs([f"Round {q['round']} - {ROUND_DATES[q['round']]}" for q in reports])
     for tab, q in zip(tabs, reports):
         with tab:
             _round_report(q)
@@ -61,7 +61,7 @@ def render(ctx: dict) -> None:
         st.markdown(
             """
 - **Abstention is measured among *registered* voters only.** Citizens who are not registered, or registered
-  in the wrong place, are invisible here — so real non-participation is higher than shown.
+  in the wrong place, are invisible here, so real non-participation is higher than shown.
 - **Results are provisional by nature:** the Ministry publishes them subject to appeals before administrative
   courts and later corrections.
 - **Paris, Lyon and Marseille** vote by sector (arrondissement); depending on the file, they appear as a single
@@ -70,7 +70,7 @@ def render(ctx: dict) -> None:
 - **Overseas departments** are included in all totals and rankings but are not drawn on the mainland map.
 - **No causal claim:** commune size, location or the number of lists are *associated* with abstention here;
   income, age, mobility or local context are not in this dataset and may explain part of the pattern.
-- **Privacy:** the data contains aggregated counts per commune only — no individual voter information.
+- **Privacy:** the data contains aggregated counts per commune only, no individual voter information.
 """
         )
     st.divider()

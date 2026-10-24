@@ -1,4 +1,4 @@
-# Report & storyboard — The Silent Majority
+# Report & storyboard - The Silent Majority
 
 **Author:** Lélia GHEZALI · EFREI Paris · BIA · 20231141
 **App:** https://silent-majority-2026.streamlit.app/ · **Repo:** https://github.com/LeghamC/Municipales2026France_Dashboard.git
@@ -8,27 +8,27 @@
 The 2026 municipal elections (15 and 22 March 2026) took place in a context of national political instability,
 a year before the 2027 presidential election. Municipal elections are the most local vote: they choose who runs
 schools, roads and local services. When a large share of registered voters stays home, local councils are chosen
-by a minority. This project asks **who is still taking part, and where participation breaks down**.
+by a minority. This project asks who is still taking part, and where participation breaks down.
 
 - **Audience:** citizens and journalists; local officials and civic associations planning turnout efforts.
 - **Key questions:** size of abstention and blank/null voting (Q1), link with commune size (Q2), geography (Q3),
   effect of having a single list (Q4), mobilisation between rounds (Q5).
-- **Takeaway the user should leave with:** abstention is not uniform — it peaks in medium-sized towns and in
+- **Takeaway the user should leave with:** abstention is not uniform: it peaks in medium-sized towns and in
   specific departments, and part of the “non-vote” is an active rejection of the choice offered.
 
 ## 2. Storyboard
 
 | # | Screen section | Question | Visual | Interaction | Headline (computed live) |
 |---|---|---|---|---|---|
-| 0 | Hook | Why care? | Quote block with the national abstention count | — | “43 % of registered voters did not vote… 20,697,441 people” |
+| 0 | Hook | Why care? | Quote block with the national abstention count | - | “43 % of registered voters did not vote… 20,697,441 people” |
 | 1 | The big picture | Q1 | 4 KPI tiles with Δ vs France | All sidebar filters | “Across France, 42.9 % stayed home, 5.4 % voted blank or null” |
 | 2 | Big-city phenomenon? | Q2 | Bar chart by size band + average line | Indicator, region, department | “From 29 % to 44 %, peaking at 48 % in towns of 20,000–99,999 voters” |
 | 3 | Where? | Q3 | Department choropleth + top/bottom-10 ranking + table | Indicator, filters, hover | “Highest in Seine-Saint-Denis (53.3 %), lowest in Cantal (29.0 %)” |
 | 4 | Every commune | Distribution | Histogram + threshold line | Threshold slider | “In the typical commune, abstention is 36.8 %” |
 | 5 | No real choice | Q4 | Blank+null share by number of lists | Filters | “Where one list ran, 14 % voted blank/null vs 3 %” |
 | 6 | Runoff | Q5 | Histogram of participation change | Filters | “Participation rose in 67 % of runoff communes (median +1.1 pts)” |
-| 7 | Data quality | Trust | Checks, missing values, exclusions | Round tabs | — |
-| 8 | Insights & next steps | So what? | Insight box + implications | Follows filters | — |
+| 7 | Data quality | Trust | Checks, missing values, exclusions | Round tabs | - |
+| 8 | Insights & next steps | So what? | Insight box + implications | Follows filters | - |
 
 ## 3. Data work
 
@@ -37,8 +37,8 @@ Source: Ministère de l'Intérieur results published on data.gouv.fr under Licen
 
 | Round | Raw rows | Clean communes | Excluded (reasons) | Failed checks |
 |---|---|---|---|---|
-| 1 | 34,836 | 34,800 | 36 — 35 outside the 101 departments (other overseas collectivities), 1 with more voters than registered voters | 0 / 3 (each check run on 34,800 rows); no duplicates, no missing values |
-| 2 | 1,526 | 1,501 | 25 — all outside the 101 departments (other overseas collectivities) | 0 / 3 (each check run on 1,501 rows); no duplicates, no missing values |
+| 1 | 34,836 | 34,800 | 36: 35 outside the 101 departments (other overseas collectivities), 1 with more voters than registered voters | 0 / 3 (each check run on 34,800 rows); no duplicates, no missing values |
+| 2 | 1,526 | 1,501 | 25, all outside the 101 departments (other overseas collectivities) | 0 / 3 (each check run on 1,501 rows); no duplicates, no missing values |
 
 All 1,501 second-round communes were matched to their first-round results on the rebuilt INSEE code (100 % join),
 which confirms that commune codes were reconstructed consistently across the two files.
@@ -71,11 +71,10 @@ Registered voters only (unregistered citizens invisible); provisional results su
 sector voting; small-commune volatility (handled by weighting); overseas departments not drawn on the map;
 associations, not causes. A handful of communes show close to 100 % abstention; they are kept in the data (they
 pass all checks) but are very small and weigh almost nothing in the weighted rates. Their cause cannot be
-determined from this dataset. Only aggregated counts per commune are used — no personal data. The dashboard is
-deliberately **non-partisan**: it does not analyse party results.
+determined from this dataset. Only aggregated counts per commune are used, no personal data.
 
 ## 6. Next steps
 
 Join INSEE socio-economic indicators to test what explains the medium-town peak and the departmental gaps;
-compare with 2014 and 2020 (2020 was disrupted by COVID-19); polling-station analysis in large cities;
+compare with 2014 and 2020 (knowing 2020 was disrupted by COVID-19); polling-station analysis in large cities;
 estimate the unregistered population to measure total non-participation.

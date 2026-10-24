@@ -1,4 +1,4 @@
-# The Silent Majority — Abstention at the 2026 French municipal elections
+# The Silent Majority - Abstention at the 2026 French municipal elections
 
 An interactive Streamlit data story about **who stayed home** at the municipal elections of
 15 and 22 March 2026: how large abstention was, whether it is a big-city phenomenon, where it is
@@ -26,7 +26,7 @@ The narrative arc, storyboard and full findings are in [`REPORT.md`](REPORT.md).
 
 | File | Source | License |
 |---|---|---|
-| Commune-level results, 1st round (15 March 2026) | Ministère de l'Intérieur on data.gouv.fr — file “Municipales 2026 - Résultats - Communes_2026-03-20.csv” (exact dataset URL in `data/SOURCES.json`) | Licence Ouverte / Open Licence 2.0 |
+| Commune-level results, 1st round (15 March 2026) | Ministère de l'Intérieur on data.gouv.fr - file “Municipales 2026 - Résultats - Communes_2026-03-20.csv” (exact dataset URL in `data/SOURCES.json`) | Licence Ouverte / Open Licence 2.0 |
 | Commune-level results, 2nd round (22 March 2026) | [Élections municipales 2026 – Résultats du second tour](https://www.data.gouv.fr/datasets/elections-municipales-2026-resultats-du-second-tour), file “Municipales 2026 - Résultats - Communes_2026-03-23_16h14.csv” | Licence Ouverte / Open Licence 2.0 |
 | Department boundaries (map only) | [france-geojson](https://github.com/gregoiredavid/france-geojson) (simplified departments) | See the repository for its license and original source |
 
@@ -110,9 +110,9 @@ blank + null share = (blank + null) ÷ voters.
 - Results are published subject to appeals and later corrections.
 - Paris, Lyon and Marseille vote by sector; their treatment depends on the commune-level file.
 - Small communes produce extreme percentages (hence weighting); a handful of communes show close to 100 %
-  abstention — they pass all checks, are kept, and weigh almost nothing in the weighted rates.
+  abstention: they pass all checks, are kept, and weigh almost nothing in the weighted rates.
 - Overseas departments are in all totals but not drawn on the mainland map.
-- Associations only — no causal claim. Socio-economic factors are not in the data.
+- Associations only, no causal claim. Socio-economic factors are not in the data.
 
 ## 7. Deployment (Streamlit Community Cloud)
 

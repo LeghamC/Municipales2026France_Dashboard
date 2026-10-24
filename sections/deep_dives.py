@@ -56,7 +56,7 @@ def geo_section(ctx: dict) -> None:
         if geojson is None:
             st.info("Map unavailable: the department boundaries file could not be loaded. The ranking on the right shows the same data.")
         elif metro.empty:
-            st.info("The selected departments are overseas and are not drawn on this mainland map — see the ranking.")
+            st.info("The selected departments are overseas and are not drawn on this mainland map. See the ranking.")
         else:
             st.plotly_chart(choropleth_departments(metro, geojson, metric), width="stretch")
             _alt(
@@ -91,7 +91,7 @@ def distribution_section(ctx: dict) -> None:
     label = METRICS[metric]["label"]
     st.header(f"{ctx['n']()} · Behind the averages: every commune")
     median = sel[metric].median()
-    st.markdown(f"**In the typical (median) commune, the {label.lower()} is {median:.1%} — but the spread is wide.**")
+    st.markdown(f"**In the typical (median) commune, the {label.lower()} is {median:.1%}, but the spread is wide.**")
     show_threshold = threshold if metric == "abstention_rate" else None
     st.plotly_chart(histogram_communes(sel, metric, show_threshold), width="stretch")
     _alt(

@@ -17,7 +17,7 @@ def render(ctx: dict) -> None:
         gap = (s["abstention_rate"] - nat["abstention_rate"]) * 100
         direction = "above" if gap > 0 else "below"
         st.markdown(
-            f"**In your selection, {s['abstention_rate']:.1%} of registered voters stayed home — "
+            f"**In your selection, {s['abstention_rate']:.1%} of registered voters stayed home: "
             f"{abs(gap):.1f} points {direction} the national rate ({nat['abstention_rate']:.1%}).**"
         )
     else:
@@ -54,7 +54,7 @@ def render(ctx: dict) -> None:
         help="Change the threshold in the sidebar.",
     )
     st.caption(
-        "KPI description: four headline figures for the current selection — registered voters, abstention rate, "
+        "KPI description: four headline figures for the current selection: registered voters, abstention rate, "
         "share of blank and null ballots, and number of communes above the abstention threshold. When filters are "
         "active, the small figures compare the selection with France as a whole (red = worse than the national figure)."
     )

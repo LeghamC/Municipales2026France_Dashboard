@@ -6,13 +6,13 @@ from utils.constants import LICENSE_LABEL, SOURCE_LABEL
 def render(ctx: dict) -> None:
     nat = ctx["national"]
     st.title("The Silent Majority")
-    st.subheader("Who stayed home at the 2026 municipal elections — and where?")
-    st.caption(f"Source: {SOURCE_LABEL} — {LICENSE_LABEL}")
+    st.subheader("Who stayed home at the 2026 municipal elections, and where?")
+    st.caption(f"Source: {SOURCE_LABEL} - {LICENSE_LABEL}")
 
     st.markdown(
         f"""
 > **{nat['abstention_rate']:.0%} of registered voters did not vote** in the
-> {"first" if ctx["round"] == 1 else "second"} round of the March 2026 municipal elections —
+> {"first" if ctx["round"] == 1 else "second"} round of the March 2026 municipal elections,
 > that is **{nat['abstentions']:,.0f} people** out of {nat['inscrits']:,.0f} registered.
 """
     )
@@ -25,7 +25,7 @@ def render(ctx: dict) -> None:
 Municipal elections choose the mayors and councils who run schools, local roads, housing
 and public services in roughly 35,000 communes. They took place on 15 and 22 March 2026,
 in a period of national political instability and a year before the 2027 presidential
-election. When abstention is high, councils are elected by a minority of residents —
+election. When abstention is high, councils are elected by a minority of residents,
 which raises a simple democratic question: **who is still taking part?**
 
 #### What this dashboard answers

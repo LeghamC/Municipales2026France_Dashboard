@@ -84,7 +84,7 @@ def histogram_communes(df: pd.DataFrame, metric: str, threshold: float | None = 
         marker_line_width=0,
         hovertemplate=label + ": %{x}<br>Communes: %{y:,}<extra></extra>",
     )
-    pct_axis(fig, "x", label + " (%) — one commune = one count")
+    pct_axis(fig, "x", label + " (%) - one commune = one count")
     fig.update_yaxes(title_text="Number of communes")
     if threshold is not None:
         reference_line(fig, threshold, f"Threshold {threshold:.0%}", axis="x")
