@@ -101,7 +101,7 @@ def clean_round(raw: pd.DataFrame, round_no: int) -> tuple[pd.DataFrame, dict]:
             n = int(series.isna().sum() + (series.astype("string") == "").sum()) if series.dtype == "string" else int(series.isna().sum())
             missing.append({"column": col, "source_column": mapping[col], "missing": n})
         else:
-            missing.append({"column": col, "source_column": "not in file", "missing": None})
+            missing.append({"column": col, "source_column": "(not in file)", "missing": None})
     quality["missing"] = missing
 
     if vote_cols:
@@ -196,3 +196,4 @@ def runoff_comparison(df: pd.DataFrame) -> pd.DataFrame:
     out["blank_null_t2"] = t2.loc[common, "blank_null_share"]
     out["delta_participation_pts"] = (out["participation_t2"] - out["participation_t1"]) * 100
     return out.reset_index()
+

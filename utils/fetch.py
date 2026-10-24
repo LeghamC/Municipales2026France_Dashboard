@@ -72,3 +72,4 @@ def fetch_geojson(force: bool = False) -> Path:
     if GEOJSON_FILE.exists() and not force:
         return GEOJSON_FILE
     return download(GEOJSON_URL, GEOJSON_FILE)
+

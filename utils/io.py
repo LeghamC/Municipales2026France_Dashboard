@@ -106,3 +106,4 @@ def load_geojson() -> dict | None:
     if not GEOJSON_FILE.exists():
         return None
     return rewind_for_plotly(json.loads(GEOJSON_FILE.read_text(encoding="utf-8")))
+

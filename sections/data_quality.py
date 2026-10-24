@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 
 from utils.constants import ROUND_DATES
+from utils.style import section
 
 
 def _round_report(q: dict) -> None:
@@ -46,7 +47,7 @@ def _round_report(q: dict) -> None:
 
 
 def render(ctx: dict) -> None:
-    st.header("Data quality & limitations")
+    section("Data quality & limitations", kicker="Can you trust it?")
     st.markdown(
         "**Every figure above comes from the official results file, after the checks below.** "
         "Rates are recomputed from raw counts rather than taken from the file's percentage columns."
@@ -70,7 +71,8 @@ def render(ctx: dict) -> None:
 - **Overseas departments** are included in all totals and rankings but are not drawn on the mainland map.
 - **No causal claim:** commune size, location or the number of lists are *associated* with abstention here;
   income, age, mobility or local context are not in this dataset and may explain part of the pattern.
-- **Privacy:** the data contains aggregated counts per commune only, no individual voter information.
+- **Privacy:** the data contains aggregated counts per commune only, with no individual voter information.
 """
         )
     st.divider()
+

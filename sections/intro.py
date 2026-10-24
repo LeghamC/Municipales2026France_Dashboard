@@ -1,20 +1,23 @@
 import streamlit as st
 
 from utils.constants import LICENSE_LABEL, SOURCE_LABEL
+from utils.style import hero
 
 
 def render(ctx: dict) -> None:
     nat = ctx["national"]
-    st.title("The Silent Majority")
-    st.subheader("Who stayed home at the 2026 municipal elections, and where?")
-    st.caption(f"Source: {SOURCE_LABEL} - {LICENSE_LABEL}")
-
-    st.markdown(
-        f"""
-> **{nat['abstention_rate']:.0%} of registered voters did not vote** in the
-> {"first" if ctx["round"] == 1 else "second"} round of the March 2026 municipal elections,
-> that is **{nat['abstentions']:,.0f} people** out of {nat['inscrits']:,.0f} registered.
-"""
+    round_word = "1st round · 15 March 2026" if ctx["round"] == 1 else "2nd round · 22 March 2026"
+    hero(
+        eyebrow=f"French municipal elections · {round_word}",
+        title="The Silent Majority",
+        lead="Who stayed home at the 2026 municipal elections, and where?",
+        stats=[
+            (f"{nat['abstention_rate']:.1%}", "of registered voters did not vote", True),
+            (f"{nat['abstentions'] / 1e6:.1f} M", f"people stayed home, out of {nat['inscrits'] / 1e6:.1f} M registered", False),
+            (f"{nat['blank_null_share']:.1%}", "of those who voted cast a blank or null ballot", False),
+            (f"{int(nat['communes']):,}", "communes analysed", False),
+        ],
+        source=f"Source: {SOURCE_LABEL} - {LICENSE_LABEL}",
     )
 
     left, right = st.columns([3, 2], gap="large")
@@ -52,3 +55,4 @@ associations** looking for where turnout efforts would matter most.
 """
         )
     st.divider()
+

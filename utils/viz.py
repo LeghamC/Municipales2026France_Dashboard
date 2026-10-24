@@ -8,7 +8,7 @@ BLUE = "#2a78d6"
 ORANGE = "#eb6834"
 GRAY = "#8a8985"
 SEQ_BLUE = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
-FONT = dict(family="Inter, Segoe UI, sans-serif", size=13)
+FONT = dict(family="Inter, Segoe UI, sans-serif", size=13, color="#14213d")
 
 
 def _layout(fig: go.Figure, height: int = 420, **kwargs) -> go.Figure:
@@ -16,8 +16,10 @@ def _layout(fig: go.Figure, height: int = 420, **kwargs) -> go.Figure:
     fig.update_layout(
         height=height,
         font=FONT,
-        hoverlabel=dict(font_size=13),
+        hoverlabel=dict(font_size=13, bgcolor="white", bordercolor="#e6e4de"),
         bargap=0.25,
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
         **kwargs,
     )
     return fig
@@ -53,7 +55,7 @@ def choropleth_departments(agg: pd.DataFrame, geojson: dict, metric: str) -> go.
     fig.update_traces(marker_line_color="rgba(255,255,255,0.8)", marker_line_width=0.6)
     fig.update_geos(fitbounds="locations", visible=False)
     fig.update_coloraxes(colorbar=dict(title=METRICS[metric]["short"], tickformat=".0%"))
-    return _layout(fig, height=560)
+    return _layout(fig, height=500, margin=dict(l=0, r=0, t=10, b=0))
 
 
 def bar_by_size(agg: pd.DataFrame, metric: str, national: float) -> go.Figure:
@@ -117,7 +119,7 @@ def ranking_departments(agg: pd.DataFrame, metric: str, n: int = 10) -> go.Figur
     fig.update_traces(cliponaxis=False)
     fig.update_xaxes(range=[0, data[metric].max() * 1.18])
     fig.update_yaxes(title_text="", categoryorder="total ascending")
-    return _layout(fig, height=max(420, 26 * len(data)), legend=dict(title="", orientation="h", y=1.0, yanchor="bottom", x=0), margin=dict(l=10, r=10, t=50, b=10))
+    return _layout(fig, height=max(420, 26 * len(data)), legend=dict(title="", orientation="h", y=1.0, yanchor="bottom", x=0), margin=dict(l=10, r=55, t=50, b=10))
 
 
 def bar_by_lists(agg: pd.DataFrame, metric: str) -> go.Figure:
@@ -147,3 +149,4 @@ def runoff_histogram(cmp: pd.DataFrame) -> go.Figure:
     fig.update_yaxes(title_text="Number of communes")
     reference_line(fig, 0, "No change", axis="x")
     return _layout(fig, height=360)
+

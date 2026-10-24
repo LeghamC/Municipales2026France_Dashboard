@@ -78,3 +78,4 @@ determined from this dataset. Only aggregated counts per commune are used, no pe
 Join INSEE socio-economic indicators to test what explains the medium-town peak and the departmental gaps;
 compare with 2014 and 2020 (knowing 2020 was disrupted by COVID-19); polling-station analysis in large cities;
 estimate the unregistered population to measure total non-participation.
+

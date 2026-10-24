@@ -6,8 +6,10 @@ from utils.constants import LICENSE_LABEL, METRICS, ROUND_DATES, SIZE_LABELS, SO
 from utils.io import load_geojson
 from utils.pipeline import build, load_processed
 from utils.prep import aggregate
+from utils.style import inject_css
 
 st.set_page_config(page_title="The Silent Majority - Municipales 2026", page_icon="🗳️", layout="wide")
+inject_css()
 
 
 @st.cache_data(show_spinner="Loading and cleaning the election data…")
@@ -59,7 +61,8 @@ geojson = get_geojson()
 rounds = sorted(data["round"].unique())
 
 with st.sidebar:
-    st.header("Explore the data")
+    st.markdown('<div class="side-brand">The Silent Majority<span>Municipales 2026 · explorer</span></div>', unsafe_allow_html=True)
+    st.divider()
     round_no = st.radio(
         "Election round",
         rounds,
@@ -128,3 +131,4 @@ overview.render(ctx)
 deep_dives.render(ctx)
 data_quality.render(ctx)
 conclusions.render(ctx)
+

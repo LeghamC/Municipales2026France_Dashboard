@@ -41,7 +41,7 @@ Requires Python 3.12 or 3.13.
 
 ```bash
 python -m venv .venv
-# Windows: .venv\Scripts\activate      macOS/Linux: source .venv/bin/activate
+.venv\Scripts\activate
 pip install -r requirements.txt
 python scripts/download_data.py        # downloads, cleans, writes data/processed/
 streamlit run app.py
@@ -125,5 +125,6 @@ blank + null share = (blank + null) ÷ voters.
 
 ## 8. Reproducibility
 
-Dependencies are pinned in `requirements.txt`. No random sampling is used (the full dataset is processed),
-so results are deterministic for a given source file.
+Dependencies are pinned in `requirements.txt`. No random sampling is used and the full dataset is processed,
+therefore results are deterministic for a given source file.
+

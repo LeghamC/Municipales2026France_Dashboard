@@ -3,6 +3,7 @@ import streamlit as st
 
 from utils.constants import METRICS
 from utils.prep import aggregate, runoff_comparison
+from utils.style import headline, section
 from utils.viz import (
     bar_by_lists,
     bar_by_size,
@@ -21,7 +22,7 @@ def size_section(ctx: dict) -> None:
     metric, sel = ctx["metric"], ctx["sel"]
     label = METRICS[metric]["label"]
     by_size = aggregate(sel, "size_band")
-    st.header(f"{ctx['n']()} · Is it a big-city phenomenon?")
+    section("Is it a big-city phenomenon?", ctx["n"](), "Commune size")
     if len(by_size) >= 2:
         first, last = by_size.iloc[0], by_size.iloc[-1]
         peak = by_size.loc[by_size[metric].idxmax()]
@@ -31,7 +32,7 @@ def size_section(ctx: dict) -> None:
         )
         if peak["size_band"] not in (first["size_band"], last["size_band"]):
             text += f", peaking at {peak[metric]:.0%} in communes with {peak['size_band']}"
-        st.markdown(text + ".**")
+        headline(text + ".**")
     st.plotly_chart(bar_by_size(by_size, metric, ctx["selection"][metric]), width="stretch")
     _alt(
         f"Bar chart of the {label.lower()} by commune size band, from the smallest communes on the left to the "
@@ -43,11 +44,11 @@ def geo_section(ctx: dict) -> None:
     metric, sel, geojson = ctx["metric"], ctx["sel"], ctx["geojson"]
     label = METRICS[metric]["label"]
     by_dep = aggregate(sel, ["dep_code", "dep_name", "region"])
-    st.header(f"{ctx['n']()} · Where is it concentrated?")
+    section("Where is it concentrated?", ctx["n"](), "Geography")
     if len(by_dep) >= 2:
         hi = by_dep.loc[by_dep[metric].idxmax()]
         lo = by_dep.loc[by_dep[metric].idxmin()]
-        st.markdown(
+        headline(
             f"**{label}: highest in {hi['dep_name']} ({hi[metric]:.1%}), lowest in {lo['dep_name']} ({lo[metric]:.1%}).**"
         )
     map_col, rank_col = st.columns([3, 2], gap="large")
@@ -89,9 +90,9 @@ def geo_section(ctx: dict) -> None:
 def distribution_section(ctx: dict) -> None:
     metric, sel, threshold = ctx["metric"], ctx["sel"], ctx["threshold"]
     label = METRICS[metric]["label"]
-    st.header(f"{ctx['n']()} · Behind the averages: every commune")
+    section("Behind the averages: every commune", ctx["n"](), "Distribution")
     median = sel[metric].median()
-    st.markdown(f"**In the typical (median) commune, the {label.lower()} is {median:.1%}, but the spread is wide.**")
+    headline(f"**In the typical (median) commune, the {label.lower()} is {median:.1%}, but the spread is wide.**")
     show_threshold = threshold if metric == "abstention_rate" else None
     st.plotly_chart(histogram_communes(sel, metric, show_threshold), width="stretch")
     _alt(
@@ -114,11 +115,11 @@ def choice_section(ctx: dict) -> None:
         return
     d["lists_label"] = pd.cut(d["n_lists"].astype(int), [0, 1, 2, 3, 10_000], labels=["1 list", "2 lists", "3 lists", "4+ lists"])
     agg = aggregate(d, "lists_label")
-    st.header(f"{ctx['n']()} · When there is no real choice")
+    section("When there is no real choice", ctx["n"](), "Blank & null ballots")
     if len(agg) >= 2 and "1 list" in agg["lists_label"].astype(str).values:
         one = agg[agg["lists_label"].astype(str) == "1 list"].iloc[0]
         many = aggregate(d[d["n_lists"] >= 2]).iloc[0]
-        st.markdown(
+        headline(
             f"**Where only one list ran, {one['blank_null_share']:.0%} of voters cast a blank or null ballot, "
             f"versus {many['blank_null_share']:.0%} where they had a choice.**"
         )
@@ -137,9 +138,9 @@ def runoff_section(ctx: dict) -> None:
     cmp = cmp[cmp["insee"].isin(ctx["sel"]["insee"])]
     if cmp.empty:
         return
-    st.header(f"{ctx['n']()} · Does a runoff mobilise voters?")
+    section("Does a runoff mobilise voters?", ctx["n"](), "Between the rounds")
     rose = (cmp["delta_participation_pts"] > 0).mean()
-    st.markdown(
+    headline(
         f"**In {len(cmp):,} communes that held a 2nd round, participation rose in {rose:.0%} of them "
         f"(median change {cmp['delta_participation_pts'].median():+.1f} points).**"
     )
@@ -162,3 +163,4 @@ def render(ctx: dict) -> None:
     choice_section(ctx)
     runoff_section(ctx)
     st.divider()
+

@@ -1,5 +1,7 @@
 import streamlit as st
 
+from utils.style import headline, section
+
 
 def _delta_pts(value: float, ref: float, filtered: bool) -> str | None:
     if not filtered:
@@ -12,16 +14,16 @@ def render(ctx: dict) -> None:
     filtered, threshold = ctx["is_filtered"], ctx["threshold"]
     flagged = int((sel["abstention_rate"] >= threshold).sum())
 
-    st.header("1 · The big picture")
+    section("The big picture", 1, "How big is it?")
     if filtered:
         gap = (s["abstention_rate"] - nat["abstention_rate"]) * 100
         direction = "above" if gap > 0 else "below"
-        st.markdown(
-            f"**In your selection, {s['abstention_rate']:.1%} of registered voters stayed home: "
+        headline(
+            f"**In your selection, {s['abstention_rate']:.1%} of registered voters stayed home, "
             f"{abs(gap):.1f} points {direction} the national rate ({nat['abstention_rate']:.1%}).**"
         )
     else:
-        st.markdown(
+        headline(
             f"**Across France, {nat['abstention_rate']:.1%} of registered voters stayed home, and "
             f"{nat['blank_null_share']:.1%} of those who voted cast a blank or null ballot.**"
         )
@@ -59,3 +61,4 @@ def render(ctx: dict) -> None:
         "active, the small figures compare the selection with France as a whole (red = worse than the national figure)."
     )
     st.divider()
+

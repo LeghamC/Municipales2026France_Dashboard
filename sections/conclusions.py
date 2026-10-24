@@ -1,6 +1,7 @@
 import streamlit as st
 
 from utils.prep import aggregate, runoff_comparison
+from utils.style import section
 
 
 def _insights(ctx: dict) -> list[str]:
@@ -48,7 +49,7 @@ def _insights(ctx: dict) -> list[str]:
 
 
 def render(ctx: dict) -> None:
-    st.header("Key insights & next steps")
+    section("Key insights & next steps", kicker="So what?")
     st.success("\n".join(f"- {line}" for line in _insights(ctx)))
     left, right = st.columns(2, gap="large")
     with left:
@@ -79,3 +80,4 @@ def render(ctx: dict) -> None:
         "These findings describe associations in official counts; they do not establish causes. "
         "See “Data quality & limitations” above."
     )
+

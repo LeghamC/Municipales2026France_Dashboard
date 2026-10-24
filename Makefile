@@ -15,3 +15,4 @@ clean:
 	rm -rf data/processed/* data/raw/*.csv
 
 all: install data run
+

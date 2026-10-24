@@ -99,3 +99,4 @@ def headline(markdown_text: str) -> None:
     parts = text.split("**")
     rendered = "".join(f"<strong>{p}</strong>" if i % 2 else p for i, p in enumerate(parts))
     st.markdown(f'<div class="headline">{rendered}</div>', unsafe_allow_html=True)
+

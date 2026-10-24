@@ -36,3 +36,4 @@ def load_processed() -> tuple[pd.DataFrame, list[dict]] | None:
     df = pd.read_parquet(PROCESSED_FILE)
     reports = json.loads(QUALITY_FILE.read_text(encoding="utf-8"))
     return df, reports
+
